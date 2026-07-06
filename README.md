@@ -67,7 +67,7 @@ The 5-bit alu_control determines the instruction to execute, thus mapping to a s
 The figure below shows the block diagram structure of the top-level ALU. It consists of an Input Router which performs operand routing and operand isolation to reduce power, an Output Router that selects the correct ALU results from the execution unit.
 <center>
   <figure>
-    <img src="images/alu_arch.png" alt="ALU block diagram" width="70%">
+    <img src="images/alu_arch.png" alt="ALU block diagram" width="100%">
     <figcaption><i>Figure 2: ALU block diagram</i></figcaption>
   </figure>
 </center>
