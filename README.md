@@ -9,7 +9,7 @@ Generally, the project is a great practice for academic purposes in terms of imp
 ### Top-level ALU Interface
 <center>
   <figure>
-    <img src="images/top_alu.png" alt="ALU Architecture" width="50%">
+    <img src="images/top_alu.png" alt="ALU Architecture" width="100%">
     <figcaption><i>Figure 1: Top-Level ALU Interface</i></figcaption>
   </figure>
 </center>
