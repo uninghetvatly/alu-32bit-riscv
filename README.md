@@ -80,7 +80,7 @@ The status signals from the multiplier and divider are basically resource sharin
 The input router must also output the type of instruction the execution unit is performing so that the output router can route the correct alu_result from the functional units.
 <center>
   <figure>
-    <img src="images/input.png" alt="Input Router" width="100%">
+    <img src="images/input.png" alt="Input Router" width="70%">
     <figcaption><i>Figure 3: Input Router</i></figcaption>
   </figure>
 </center>
@@ -90,7 +90,7 @@ The Output Router routes the correct alu_result from the functional units based 
 
 <center>
   <figure>
-    <img src="images/output.png" alt="output Router" width="100%">
+    <img src="images/output.png" alt="output Router" width="70%">
     <figcaption><i>Figure 4: Output Router</i></figcaption>
   </figure>
 </center>
