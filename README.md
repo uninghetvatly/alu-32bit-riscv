@@ -9,10 +9,11 @@ Generally, the project is a great practice for academic purposes in terms of imp
 ### Top-level ALU Interface
 <center>
   <figure>
-    <img src="images/top_alu.png" alt="ALU Architecture" width="100%">
+    <img src="images/top_alu.png" alt="ALU Architecture" width="50%">
     <figcaption><i>Figure 1: Top-Level ALU Interface</i></figcaption>
   </figure>
 </center>
+
 The ALU interface receives a start signal from external controller to perform multi-cycle instruction, including multiplication and division. It should be noted that for multi-cycle operations, the done signal is only high for 1 clock cycle before going back to idle state.
 
 For combinational instructions, such as addition, subtraction, both done and idle signals are always 1.
@@ -66,7 +67,7 @@ The 5-bit alu_control determines the instruction to execute, thus mapping to a s
 The figure below shows the block diagram structure of the top-level ALU. It consists of an Input Router which performs operand routing and operand isolation to reduce power, an Output Router that selects the correct ALU results from the execution unit.
 <center>
   <figure>
-    <img src="images/alu_arch.png" alt="ALU block diagram" width="100%">
+    <img src="images/alu_arch.png" alt="ALU block diagram" width="70%">
     <figcaption><i>Figure 2: ALU block diagram</i></figcaption>
   </figure>
 </center>
@@ -79,7 +80,7 @@ The status signals from the multiplier and divider are basically resource sharin
 The input router must also output the type of instruction the execution unit is performing so that the output router can route the correct alu_result from the functional units.
 <center>
   <figure>
-    <img src="images/input.png" alt="Input Router" width="70%">
+    <img src="images/input.png" alt="Input Router" width="40%">
     <figcaption><i>Figure 3: Input Router</i></figcaption>
   </figure>
 </center>
@@ -89,7 +90,7 @@ The Output Router routes the correct alu_result from the functional units based 
 
 <center>
   <figure>
-    <img src="images/output.png" alt="output Router" width="70%">
+    <img src="images/output.png" alt="output Router" width="40%">
     <figcaption><i>Figure 4: Output Router</i></figcaption>
   </figure>
 </center>
@@ -100,7 +101,7 @@ The execution units consists of 6 sub functional units: arith_unit, shift_unit, 
 The div_unit and mul_unit share resource with other functional units but the wiring is not shown as the Input Router handles input wiring entirely.
 <center>
   <figure>
-    <img src="images/func.png" alt="Execution unit architecture" width="100%">
+    <img src="images/func.png" alt="Execution unit architecture" width="50%">
     <figcaption><i>Figure 5: Execution unit architecture</i></figcaption>
   </figure>
 </center>
@@ -116,10 +117,11 @@ However, this is also a shared hardware resource that can handle four more disti
 
 To compute 2's complement of two 32-bit numbers $X$ and $Y$, the input operands of the arith_unit are as follows, with sub_ctrl set to 0 (perform addition):
 $$op2[63:0] = \{Y[31:0], X[31:0]\}$$
+
 $$op1[63:0] = \{31'\text{b0}, (|X[31:0]), 32'\text{b0}\}$$
 <center>
   <figure>
-    <img src="images/arith.png" alt="Arithemtic Unit" width="100%">
+    <img src="images/arith.png" alt="Arithemtic Unit" width="50%">
     <figcaption><i>Figure 6: Arithmetic Unit</i></figcaption>
   </figure>
 </center>
@@ -127,7 +129,7 @@ $$op1[63:0] = \{31'\text{b0}, (|X[31:0]), 32'\text{b0}\}$$
 The arith_unit is implemented using 1-bit CLA blocks. A total of 64 CLA blocks are used. 
 <center>
   <figure>
-    <img src="images/cla.png" alt="1-bit CLA block" width="60%">
+    <img src="images/cla.png" alt="1-bit CLA block" width="30%">
     <figcaption><i>Figure 7: 1-bit CLA block </i></figcaption>
   </figure>
 </center>
@@ -135,7 +137,7 @@ To generate all carry bits, a Han-Carlson parallel prefix tree structure is appl
 
 <center>
   <figure>
-    <img src="images/han_carlson.png" alt="16-bit Han-Carlson tree" width="100%">
+    <img src="images/han_carlson.png" alt="16-bit Han-Carlson tree" width="50%">
     <figcaption><i>Figure 8: 16-bit Han-Carlson tree </i></figcaption>
   </figure>
 </center>
@@ -164,7 +166,7 @@ It has two primary functions:
 
 <center>
   <figure>
-    <img src="images/branch.png" alt="Branch Unit" width="100%">
+    <img src="images/branch.png" alt="Branch Unit" width="50%">
     <figcaption><i>Figure 9: Branch Unit</i></figcaption>
   </figure>
 </center>
@@ -174,13 +176,13 @@ The table below shows how the 3-bit cmp_ctrl signal determines the branch, compa
 | Instruction | cmp_ctrl[2:0] | Boolean Flag Condition for Output |
 | --- | --- | --- |
 | **slt** | 000 | $\text{negative} \oplus \text{overflow}$ |
-| **sltu** | 001 | $\overline{\text{carry\_out}}$ |
+| **sltu** | 001 | $\overline{\mathrm{carry\_out}}$ |
 | **beq** | 010 | $\text{zero}$ |
 | **bne** | 011 | $\overline{\text{zero}}$ |
 | **blt** | 100 | $\text{negative} \oplus \text{overflow}$ |
 | **bge** | 101 | $\overline{\text{negative} \oplus \text{overflow}}$ |
-| **bltu** | 110 | $\overline{\text{carry\_out}}$ |
-| **bgeu** | 111 | $\text{carry\_out}$ |
+| **bltu** | 110 | $\overline{\mathrm{carry\_out}}$ |
+| **bgeu** | 111 | $\mathrm{carry\_out}$ |
 
 | Port Name | Direction | Width (Bits) | Type | Description |
 | --- | --- | --- | --- | --- |
@@ -198,7 +200,7 @@ The logic_unit is a combinational block that performs bitwise logical operations
 
 <center>
   <figure>
-    <img src="images/logic.png" alt="Logic Unit" width="100%">
+    <img src="images/logic.png" alt="Logic Unit" width="50%">
     <figcaption><i>Figure 10: Logic Unit</i></figcaption>
   </figure>
 </center>
@@ -227,7 +229,7 @@ The unit is a shared hardware resource as it also normalizes the divisor and den
 
 <center>
   <figure>
-    <img src="images/shift.png" alt="Shifter Unit" width="100%">
+    <img src="images/shift.png" alt="Shifter Unit" width="50%">
     <figcaption><i>Figure 11: Shifter Unit</i></figcaption>
   </figure>
 </center>
@@ -260,7 +262,7 @@ The mul_unit is a multi-cycle functional unit that performs unsigned/signed mult
 
 <center>
   <figure>
-    <img src="images/mul.png" alt="Mul unit" width="100%">
+    <img src="images/mul.png" alt="Mul unit" width="50%">
     <figcaption><i>Figure 12: Multiplier Unit</i></figcaption>
   </figure>
 </center>
@@ -299,11 +301,10 @@ A total of 18 partial products are generated and are then rearranged using Baugh
 A rearrangement for a 6-bit multiplier is shown in the figure below for reference. Note that the black circles indicate the inversion of bits if the sign bit of the same row is 1, otherwise, original bits of the partial product matrix. 
 <center>
   <figure>
-    <img src="images/partial.png" alt="Partial product structure for 6-bit multiplier" width="100%">
+    <img src="images/partial.png" alt="Partial product structure for 6-bit multiplier" width="50%">
     <figcaption><i>Figure 13: Partial product structure for 6-bit multiplier</i></figcaption>
   </figure>
 </center>
-
 
 To accumulate this partial product matrix with 18 rows, a Dadda tree structure is used. The Dadda tree reduces the height of the partial product matrix in a specific order: 18 &rarr; 13 &rarr; 9 &rarr; 6 &rarr; 4 &rarr; 3 &rarr; 2 by placing half adders and full adders in specific bit positions.
 
@@ -314,7 +315,7 @@ Due to the long combinational path of partial product generation and accumulatio
 The ASMD chart below shows the execution step of the unit.
 <center>
   <figure>
-    <img src="images/asmd_mul.png" alt="ASMD chart for the execution of the multiplier" width="100%">
+    <img src="images/asmd_mul.png" alt="ASMD chart for the execution of the multiplier" width="50%">
     <figcaption><i>Figure 14: ASMD chart for the execution of the multiplier</i></figcaption>
   </figure>
 </center>
@@ -326,10 +327,11 @@ Because the state transition is primarily unconditional, the unit is implemented
 The div_unit is a multi-cycle functional unit that performs unsigned/signed division. 
 <center>
   <figure>
-    <img src="images/div.png" alt="Divider" width="100%">
+    <img src="images/div.png" alt="Divider" width="50%">
     <figcaption><i>Figure 15: Divider Unit</i></figcaption>
   </figure>
 </center>
+
 The table below shows how the 2-bit div_type signal determines which division instruction that the unit must perform.
 
 | Instruction | div_type[1:0] | Operand Interpretation | Selected Output Component |
@@ -370,7 +372,7 @@ The div_unit is designed as a Radix-4 SRT divider with on-the-fly conversion and
 The ASMD chart below shows the execution step of the unit:
 <center>
   <figure>
-    <img src="images/asmd_div.png" alt="ASMD chart for the execution of the divider" width="100%">
+    <img src="images/asmd_div.png" alt="ASMD chart for the execution of the divider" width="80%">
     <figcaption><i>Figure 16: ASMD chart for the execution of the divider</i></figcaption>
   </figure>
 </center>
@@ -394,7 +396,7 @@ During the SIGN_FIX state, the unit sends request signals to the arith_unit to p
 Using the ASMD chart, the unit can be designed in datapath and controller structure as follows:
 <center>
   <figure>
-    <img src="images/div_struct.png" alt="Datapath and controller structure for the divider" width="100%">
+    <img src="images/div_struct.png" alt="Datapath and controller structure for the divider" width="70%">
     <figcaption><i>Figure 17: Datapath and controller structure for the divider</i></figcaption>
   </figure>
 </center>
